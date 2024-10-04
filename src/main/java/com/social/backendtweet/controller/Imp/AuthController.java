@@ -1,4 +1,4 @@
-package com.social.backendtweet.controller;
+package com.social.backendtweet.controller.Imp;
 
 import com.social.backendtweet.config.JWTProvider;
 import com.social.backendtweet.exception.UserException;
@@ -86,14 +86,14 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Lấy quyền hạn (authorities) từ đối tượng Authentication
-        String authorities = authentication.getAuthorities().toString();
+        // Retrieve the authenticated user details
+        org.springframework.security.core.userdetails.User authenticatedUser =
+                (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 
-        // Tạo token với email và quyền hạn
-        String token = jwtProvider.generateToken(user.getEmail(), authorities);
+        // Generate token with email and authorities
+        String token = jwtProvider.generateToken(authenticatedUser.getUsername(), authenticatedUser.getAuthorities().toString());
 
-        User userDetails = (User) authentication.getPrincipal();
-        AuthResponse authResponse = new AuthResponse(token, userDetails.getUsername(), userDetails.getEmail());
+        AuthResponse authResponse = new AuthResponse(token, authenticatedUser.getUsername(), email);
 
         return new ResponseEntity<>(authResponse, HttpStatus.OK);
     }

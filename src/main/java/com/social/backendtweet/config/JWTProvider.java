@@ -1,8 +1,8 @@
 package com.social.backendtweet.config;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -16,7 +16,7 @@ public class JWTProvider {
         this.secretKey = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
     }
 
-    // Tạo token
+    // Generate token
     public String generateToken(String email, String authorities) {
         return Jwts.builder()
                 .setSubject(email)
@@ -28,7 +28,7 @@ public class JWTProvider {
                 .compact();
     }
 
-    // Lấy email từ JWT
+    // Get email from JWT
     public String getEmailFromToken(String jwt) {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(secretKey)
