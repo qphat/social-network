@@ -9,15 +9,12 @@ import java.util.List;
 
 public interface TweetRepository extends JpaRepository<Tweet, Long> {
 
-    List<Tweet> findAllByIsTweetTrueOrderByCreatedAtDesc();
+    List<Tweet> findAllByIsReTweetTrueOrderByCreatedAtDesc();
 
-    List<Tweet> findByRetweetUserContainsOrUser_IdAndIsTweetTrueOrderByCreatedAtDesc(User user, Long userId);
+    List<Tweet> findByReTweetUserContainsOrUser_IdAndIsReTweetTrueOrderByCreatedAtDesc(User user, Long userId);
 
     List<Tweet> findByLikesContainingOrderByCreatedAtDesc(User user);
 
-    @Query("Select t From Tweet  t JOIN t.likes I where l.user.id=:userld ")
+    @Query("Select t From Tweet t JOIN t.likes l where l.user.id=:userId")
     List<Tweet> findByLikeUserID(Long userId);
-
-
-
 }
