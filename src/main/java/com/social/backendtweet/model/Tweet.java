@@ -12,8 +12,6 @@ import java.util.List;
 
 @Entity
 @Data
-@Getter
-@Setter
 public class Tweet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

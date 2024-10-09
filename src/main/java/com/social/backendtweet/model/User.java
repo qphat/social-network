@@ -7,10 +7,6 @@ import net.minidev.json.annotate.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Data
 public class User {
@@ -26,10 +22,15 @@ public class User {
     private String password;
     private String mobile;
     private String image;
-    private String backgoundImage;
     private String bio;
     private boolean req_user;
     private boolean login_with_google;
+
+    private String fullName;
+    private String avatar;
+    private String coverImage;
+    private boolean isFollowed;
+    private boolean isVerified;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -57,4 +58,28 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "tweet_id")
     )
     private List<Tweet> reTweetTweet = new ArrayList<>();
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
+
+    public String getBackgroundImage() {
+        return coverImage;
+    }
+
+    public boolean isFollowed() {
+        return isFollowed;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
 }

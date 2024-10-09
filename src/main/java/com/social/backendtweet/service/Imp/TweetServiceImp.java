@@ -1,12 +1,12 @@
-package com.social.backendtweet.controller.Imp;
+package com.social.backendtweet.service.Imp;
 
-import com.social.backendtweet.controller.TweetService;
-import com.social.backendtweet.exception.TweetExcepction;
+import com.social.backendtweet.service.TweetService;
+import com.social.backendtweet.exception.TweetException;
 import com.social.backendtweet.exception.UserException;
 import com.social.backendtweet.model.Tweet;
 import com.social.backendtweet.model.User;
 import com.social.backendtweet.reposity.TweetRepository;
-import com.social.backendtweet.reposity.UserReposity;
+import com.social.backendtweet.reposity.UserRepository;
 import com.social.backendtweet.request.TweetReplyReques;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class TweetServiceImp implements TweetService {
     private TweetRepository tweetRepository;
 
     @Autowired
-    private UserReposity userRepository;
+    private UserRepository userRepository;
 
     @Override
     public Tweet createTweet(Tweet req, User user) throws UserException {
@@ -40,7 +40,7 @@ public class TweetServiceImp implements TweetService {
     }
 
     @Override
-    public Tweet reTweet(Long tweetId, User user) throws UserException, TweetExcepction {
+    public Tweet reTweet(Long tweetId, User user) throws UserException, TweetException {
         Tweet tweet = findTweetById(tweetId);
         if (tweet.getReTweetUser().contains(user)) {
             tweet.getReTweetUser().remove(user);
@@ -51,28 +51,28 @@ public class TweetServiceImp implements TweetService {
     }
 
     @Override
-    public Tweet findTweetById(Long tweetId) throws TweetExcepction {
+    public Tweet findTweetById(Long tweetId) throws TweetException {
         Tweet tweet = tweetRepository.findById(tweetId)
-                .orElseThrow(() -> new TweetExcepction("Tweet not found"));
+                .orElseThrow(() -> new TweetException("Tweet not found"));
         return tweet;
     }
 
     @Override
-    public void deleteTweetById(Long tweetId) throws TweetExcepction {
+    public void deleteTweetById(Long tweetId) throws TweetException {
         Tweet tweet = findTweetById(tweetId);
         if (!tweet.equals(tweet.getUser().getId())) {
-            throw new TweetExcepction(" you can't delete this tweet");
+            throw new TweetException(" you can't delete this tweet");
         }
         tweetRepository.delete(tweet);
     }
 
     @Override
-    public Tweet removeRetweet(Long tweetId, User user) throws TweetExcepction, UserException {
+    public Tweet removeRetweet(Long tweetId, User user) throws TweetException, UserException {
         return null;
     }
 
     @Override
-    public Tweet createReplyTweet(TweetReplyReques req, Long tweetId, User user) throws TweetExcepction, UserException {
+    public Tweet createReplyTweet(TweetReplyReques req, Long tweetId, User user) throws TweetException, UserException {
         Tweet tweet = new Tweet();
         tweet.setContent(req.getContent());
         tweet.setCreatedAt(req.getCreatedAt());

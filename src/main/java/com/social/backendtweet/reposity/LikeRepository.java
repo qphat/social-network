@@ -1,10 +1,12 @@
 package com.social.backendtweet.reposity;
 
 import com.social.backendtweet.model.Like;
+import com.social.backendtweet.model.Tweet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface LikeRepository extends JpaRepository<Like, Long> {
@@ -16,4 +18,6 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
 
     @Query("SELECT COUNT(l) > 0 FROM Like l WHERE l.tweet.id = :tweetId AND l.user.id = :userId")
     boolean existsByTweetIdAndUserId(@Param("tweetId") Long tweetId, @Param("userId") Long userId);
+
+    List<Like> findByTweet(Tweet tweet);
 }

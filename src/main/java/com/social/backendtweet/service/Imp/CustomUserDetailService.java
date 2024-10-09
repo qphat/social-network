@@ -1,7 +1,7 @@
-package com.social.backendtweet.services.Imp;
+package com.social.backendtweet.service.Imp;
 
 import com.social.backendtweet.model.User; // Lớp mô hình của bạn
-import com.social.backendtweet.reposity.UserReposity;
+import com.social.backendtweet.reposity.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +16,11 @@ import java.util.List;
 public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
-    private UserReposity userReposity;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userReposity.findByUsernameOrEmail(username, username);
+        User user = userRepository.findByUsernameOrEmail(username, username);
 
         if (user == null || user.isLogin_with_google()) {
             throw new UsernameNotFoundException("User not found: " + username);

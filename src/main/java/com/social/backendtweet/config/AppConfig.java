@@ -24,6 +24,7 @@ public class AppConfig {
 
     private final JwtTokenValidator jwtTokenValidator;
 
+
     public AppConfig(JwtTokenValidator jwtTokenValidator) {
         this.jwtTokenValidator = jwtTokenValidator;
     }

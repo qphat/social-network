@@ -1,11 +1,11 @@
-package com.social.backendtweet.controller.Imp;
+package com.social.backendtweet.controller;
 
 import com.social.backendtweet.config.JWTProvider;
 import com.social.backendtweet.exception.UserException;
 import com.social.backendtweet.model.User;
-import com.social.backendtweet.reposity.UserReposity;
+import com.social.backendtweet.reposity.UserRepository;
 import com.social.backendtweet.response.AuthResponse;
-import com.social.backendtweet.services.Imp.CustomUserDetailService;
+import com.social.backendtweet.service.Imp.CustomUserDetailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final UserReposity userRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JWTProvider jwtProvider;
     private final AuthenticationManager authenticationManager;
     private final CustomUserDetailService customUserDetailsService;
 
-    public AuthController(UserReposity userRepository,
+    public AuthController(UserRepository userRepository,
                           PasswordEncoder passwordEncoder,
                           JWTProvider jwtProvider,
                           AuthenticationManager authenticationManager,

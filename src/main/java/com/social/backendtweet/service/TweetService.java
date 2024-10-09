@@ -1,6 +1,6 @@
-package com.social.backendtweet.controller;
+package com.social.backendtweet.service;
 
-import com.social.backendtweet.exception.TweetExcepction;
+import com.social.backendtweet.exception.TweetException;
 import com.social.backendtweet.exception.UserException;
 import com.social.backendtweet.model.Tweet;
 import com.social.backendtweet.model.User;
@@ -15,22 +15,22 @@ public interface TweetService {
 
 
     public List<Tweet> findAllTweets()
-            throws TweetExcepction;
+            throws TweetException;
 
     public Tweet reTweet(Long tweetId, User user)
-        throws UserException, TweetExcepction;
+        throws UserException, TweetException;
 
     public Tweet findTweetById(Long tweetId)
-        throws TweetExcepction;
+        throws TweetException;
 
     public void deleteTweetById(Long tweetId)
-        throws TweetExcepction;
+        throws TweetException;
 
     public Tweet removeRetweet(Long tweetId, User user)
-        throws TweetExcepction, UserException;
+        throws TweetException, UserException;
 
     public Tweet createReplyTweet(TweetReplyReques req, Long tweetId, User user)
-        throws TweetExcepction, UserException;
+        throws TweetException, UserException;
 
     public List<Tweet> getUserTweets(Long userId)
         throws UserException;
