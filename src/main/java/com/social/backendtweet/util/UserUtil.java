@@ -1,4 +1,4 @@
-package com.social.backendtweet.Util;
+package com.social.backendtweet.util;
 
 import com.social.backendtweet.model.User;
 

@@ -1,6 +1,6 @@
 package com.social.backendtweet.controller;
 
-import com.social.backendtweet.Util.UserUtil;
+import com.social.backendtweet.util.UserUtil;
 import com.social.backendtweet.dto.UserDTO;
 import com.social.backendtweet.dto.mapper.UserDTOMapper;
 import com.social.backendtweet.exception.TweetException;

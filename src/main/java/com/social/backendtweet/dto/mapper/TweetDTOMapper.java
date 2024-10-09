@@ -1,6 +1,6 @@
 package com.social.backendtweet.dto.mapper;
 
-import com.social.backendtweet.Util.TweetUtil;
+import com.social.backendtweet.util.TweetUtil;
 import com.social.backendtweet.dto.TweetDTO;
 import com.social.backendtweet.dto.UserDTO;
 import com.social.backendtweet.model.Tweet;
